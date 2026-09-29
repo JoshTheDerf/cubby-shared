@@ -7,7 +7,13 @@
   "license": "MIT",
   "exports": {
     "./history": "./src/history/index.ts",
-    "./actions": "./src/actions/index.ts"
+    "./gizmo": "./src/gizmo/index.ts",
+    "./snap": "./src/snap/index.ts",
+    "./nudge": "./src/nudge/index.ts",
+    "./camera": "./src/camera/index.ts",
+    "./actions": "./src/actions/index.ts",
+    "./bridge": "./src/bridge/index.ts",
+    "./bridge/protocol": "./src/bridge/protocol.ts"
   },
   "scripts": {
     "test": "vitest run",
@@ -15,7 +21,8 @@
   },
   "peerDependencies": {
     "three": ">=0.170.0",
-    "vue": "^3.5.0"
+    "vue": "^3.5.0",
+    "three-viewport-gizmo": "^2.2.0"
   },
   "peerDependenciesMeta": {
     "three": {
@@ -23,13 +30,18 @@
     },
     "vue": {
       "optional": true
+    },
+    "three-viewport-gizmo": {
+      "optional": true
     }
   },
   "devDependencies": {
-    "typescript": "^5.9.0",
-    "vitest": "^3.2.0",
     "@types/three": "^0.184.1",
-    "three": "^0.182.0"
+    "jsdom": "^26.1.0",
+    "three": "^0.182.0",
+    "three-viewport-gizmo": "^2.2.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
   },
   "repository": {
     "type": "git",

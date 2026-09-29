@@ -1,0 +1,38 @@
+{
+  "name": "@cubby/shared",
+  "version": "0.1.0",
+  "description": "Code shared by CubbyCAD and Cubby Slicer.",
+  "type": "module",
+  "private": false,
+  "license": "UNLICENSED",
+  "exports": {
+    "./history": "./src/history/index.ts",
+    "./actions": "./src/actions/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "three": ">=0.170.0",
+    "vue": "^3.5.0"
+  },
+  "peerDependenciesMeta": {
+    "three": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0",
+    "@types/three": "^0.184.1",
+    "three": "^0.182.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoshTheDerf/cubby-shared.git"
+  }
+}

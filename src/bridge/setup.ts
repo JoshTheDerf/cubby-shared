@@ -32,13 +32,13 @@ export const MCP_SETUP: McpSetupExample[] = [
   },
   {
     id: 'codex',
-    label: 'Codex CLI',
+    label: 'Codex',
     snippet: `codex mcp add cubby -- ${MCP_SERVER_COMMAND}`,
     note: 'Run once in a terminal, then start Codex.',
   },
   {
     id: 'json',
-    label: 'JSON config',
+    label: 'JSON',
     snippet: '{ "mcpServers": { "cubby": { "command": "npx", "args": ["-y", "cubby-mcp"] } } }',
     note: 'For clients with an mcpServers config file: Cursor, Windsurf, Claude Desktop and others.',
   },

@@ -1,7 +1,7 @@
 /**
  * The model-only core of CubbyCAD's `get_node` / `set_node` (moved from
  * CubbyCAD `bridge/nodeSettings.ts`, which keeps the modifier stack, group
- * combine types and history recording on top of this). Both apps' Claude Code
+ * combine types and history recording on top of this). Both apps' MCP
  * bridges validate the same arguments with the same messages and describe a
  * node the same way.
  */

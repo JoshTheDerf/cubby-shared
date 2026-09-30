@@ -1,10 +1,10 @@
 /**
- * Browser side of the Claude Code bridge: one WebSocket from this tab to the
+ * Browser side of the MCP bridge: one WebSocket from this tab to the
  * local `cubby-mcp` process on 127.0.0.1, answering tool calls with the app's
  * handlers.
  *
  * Opt-in only. Nothing connects until the user pairs from the app's
- * "Connect to Claude Code" dialog; `resume()` reconnects on reload only when
+ * "Connect an AI agent" dialog; `resume()` reconnects on reload only when
  * the user left "Reconnect automatically" on, and Disconnect clears it.
  *
  * The token the server issues on pairing lives in localStorage, so it is per
@@ -22,7 +22,7 @@ import {
 } from './protocol';
 
 export interface ToolCallContext {
-  /** Report progress (forwarded to Claude Code as MCP progress). */
+  /** Report progress (forwarded to the agent as MCP progress). */
   progress(progress: number, total?: number, message?: string): void;
   /** Aborted when the server cancels the call or the socket closes. */
   signal: AbortSignal;
@@ -43,7 +43,7 @@ export interface BridgeState {
   paired: boolean;
   autoReconnect: boolean;
   error: string | null;
-  /** Last tool Claude called, for the status indicator. */
+  /** Last tool the agent called, for the status indicator. */
   lastTool: { name: string; at: number; ok: boolean | null } | null;
   /** Calls running now. */
   busy: number;
@@ -301,8 +301,8 @@ export class BridgeClient {
       return;
     }
     if (probe === 'down') {
-      // Keep trying quietly: Claude Code may start in a moment.
-      this.set({ status: 'connecting', error: `Nothing is listening on 127.0.0.1:${port} yet. Start Claude Code with the cubby MCP server added. Retrying…` });
+      // Keep trying quietly: the agent may start in a moment.
+      this.set({ status: 'connecting', error: `Nothing is listening on 127.0.0.1:${port} yet. Start your AI agent with the cubby MCP server added. Retrying…` });
       this.scheduleRetry();
       return;
     }

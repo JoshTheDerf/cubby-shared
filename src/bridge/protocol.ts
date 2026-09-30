@@ -53,7 +53,7 @@ export interface ToolSpec {
   fileInput?: boolean;
   /**
    * Returns `file`: the server writes it to `savePath` (or a temp folder) and
-   * hands Claude the path, never the bytes.
+   * hands the agent the path, never the bytes.
    */
   fileOutput?: boolean;
   /** Longest the server waits for a result, ms. */
@@ -73,7 +73,7 @@ export interface ImagePayload {
 
 /** What a tab's tool handler returns. */
 export interface ToolResultValue {
-  /** Structured result (sent to Claude as JSON). */
+  /** Structured result (sent to the agent as JSON). */
   data?: unknown;
   /** Screenshots and other images. */
   images?: ImagePayload[];

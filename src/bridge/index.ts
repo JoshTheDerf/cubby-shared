@@ -5,3 +5,4 @@ export {
   type BridgeTool, type BridgeState, type BridgeStatus, type BridgeClientOptions, type ConfirmRequest,
   type ToolCallContext, type WebSocketLike,
 } from './client';
+export { MCP_SETUP, MCP_SERVER_COMMAND, type McpSetupExample } from './setup';

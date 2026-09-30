@@ -21,5 +21,5 @@ export * from './matrix';
 export * from './evaluate';
 export * from './tree';
 export * from './i18n';
-export * as sdf from './sdf/primitives';
-export type { Vec3 } from './sdf/types';
+export * from './sdf/primitives';
+export type { Vec3, SdfSample, ColorSample, SampleBounds, BoolMode } from './sdf/types';

@@ -11,6 +11,9 @@ Code shared by the [CubbyCAD editor](https://cubbycad.com/editor) and [Cubby Sli
 | `@cubby/shared/camera` | Viewport camera: `CameraProjection` (a perspective and orthographic pair with a switch that keeps the view and, optionally, its scale), the themed `ViewCube` for Y-up or Z-up worlds, `viewCubeThemeOptions` palettes and `ViewportCameraRig` (renderer, cameras, orbit, cube, resize and loop in one). |
 | `@cubby/shared/actions` | The action registry: action and key-binding types, `createActionRegistry`, `formatBinding` (Ctrl+Shift+Z, or ⌘⇧Z on macOS) and `bindingMatchesKey`. Each app keeps its own dispatcher policy. |
 | `@cubby/shared/bridge` | The browser half of the Claude Code bridge: `BridgeClient` connects a tab to the local cubby-mcp server on 127.0.0.1, pairs with a one-time code, keeps the token per origin and answers tool calls. `@cubby/shared/bridge/protocol` is the wire format and pairing/origin helpers, shared with the server. |
+| `@cubby/shared/cad` | CubbyCAD's modelling core: the `.cubby` node and scene types, every built-in Manifold-built shape (box … diamond, ring, baked `mesh`) with its defaults, property schema, English labels and i18n keys, `evaluateCadNode` (a node tree to one mesh, with CubbyCAD's manifold-group rules: ordered unions, expanded holes, hidden parts skipped, per-part colours, optional Z-up output and per-triangle source ids), `cadSupport` (which subtrees only CubbyCAD can build: SDF/loft/skin groups, modifiers, sculpt, script parts), `hashCadNode`, pure tree operations (create, find, group / ungroup with CubbyCAD's transform baking, holes, unique names, immutable updates), three-free matrix math, the inline mesh codec, default colours and the SDF primitives. You pass in the Manifold module. |
+| `@cubby/shared/cad/manifold` | Manifold helpers: component-split mesh ingest with tolerance-weld repair, status checks, numProp-6 (position + RGB) mesh data, hole expansion, float32-safe export and `runCsgBatch`, the group boolean program CubbyCAD's manifold worker runs. |
+| `@cubby/shared/cad/ui` | Vue + Nuxt UI components for editing shapes: `NumberSlider` (scrub-or-type number field), `ShapeParamsForm` (a shape's property form from its schema, with per-field slots) and `ShapePalette` (the shape grid). Pass a `translate` function or `provideCadTranslate(t)`; without one they use English. |
 
 ## Use it
 
@@ -18,7 +21,7 @@ Code shared by the [CubbyCAD editor](https://cubbycad.com/editor) and [Cubby Sli
 npm install github:JoshTheDerf/cubby-shared
 ```
 
-`three`, `vue` and `three-viewport-gizmo` (for the view cube) are optional peer dependencies. If you link this package from a sibling checkout, add `resolve: { dedupe: ['three', 'vue', 'three-viewport-gizmo'] }` to the app's Vite config so there's one copy of each.
+`three`, `vue`, `three-viewport-gizmo` (for the view cube), `manifold-3d` (for `cad`, which takes the initialised module as an argument) and `@nuxt/ui` (for `cad/ui`) are optional peer dependencies. If you link this package from a sibling checkout, add `resolve: { dedupe: ['three', 'vue', 'three-viewport-gizmo', '@nuxt/ui'] }` to the app's Vite config so there's one copy of each. The `cad/ui` components use Tailwind classes: add `@source "../node_modules/@cubby/shared/src/cad/ui";` (relative to your CSS entry) so Tailwind generates them.
 
 To work on it next to an app:
 

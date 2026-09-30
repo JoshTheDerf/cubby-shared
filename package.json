@@ -15,17 +15,19 @@
     "./bridge": "./src/bridge/index.ts",
     "./bridge/protocol": "./src/bridge/protocol.ts",
     "./cad": "./src/cad/index.ts",
-    "./cad/manifold": "./src/cad/manifold/index.ts"
+    "./cad/manifold": "./src/cad/manifold/index.ts",
+    "./cad/ui": "./src/cad/ui/index.ts"
   },
   "scripts": {
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
+    "manifold-3d": "^3.5.0",
     "three": ">=0.170.0",
     "three-viewport-gizmo": "^2.2.0",
     "vue": "^3.5.0",
-    "manifold-3d": "^3.5.0"
+    "@nuxt/ui": "^4.0.0"
   },
   "peerDependenciesMeta": {
     "three": {
@@ -39,16 +41,22 @@
     },
     "manifold-3d": {
       "optional": true
+    },
+    "@nuxt/ui": {
+      "optional": true
     }
   },
   "devDependencies": {
     "@types/three": "^0.184.1",
+    "@vitejs/plugin-vue": "^6.0.9",
+    "@vue/test-utils": "^2.5.1",
     "jsdom": "^26.1.0",
     "manifold-3d": "^3.5.4",
     "three": "^0.182.0",
     "three-viewport-gizmo": "^2.2.0",
     "typescript": "^5.9.0",
-    "vitest": "^3.2.0"
+    "vitest": "^3.2.0",
+    "vue": "^3.5.43"
   },
   "repository": {
     "type": "git",

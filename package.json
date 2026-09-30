@@ -13,7 +13,9 @@
     "./camera": "./src/camera/index.ts",
     "./actions": "./src/actions/index.ts",
     "./bridge": "./src/bridge/index.ts",
-    "./bridge/protocol": "./src/bridge/protocol.ts"
+    "./bridge/protocol": "./src/bridge/protocol.ts",
+    "./cad": "./src/cad/index.ts",
+    "./cad/manifold": "./src/cad/manifold/index.ts"
   },
   "scripts": {
     "test": "vitest run",
@@ -21,8 +23,9 @@
   },
   "peerDependencies": {
     "three": ">=0.170.0",
+    "three-viewport-gizmo": "^2.2.0",
     "vue": "^3.5.0",
-    "three-viewport-gizmo": "^2.2.0"
+    "manifold-3d": "^3.5.0"
   },
   "peerDependenciesMeta": {
     "three": {
@@ -33,11 +36,15 @@
     },
     "three-viewport-gizmo": {
       "optional": true
+    },
+    "manifold-3d": {
+      "optional": true
     }
   },
   "devDependencies": {
     "@types/three": "^0.184.1",
     "jsdom": "^26.1.0",
+    "manifold-3d": "^3.5.4",
     "three": "^0.182.0",
     "three-viewport-gizmo": "^2.2.0",
     "typescript": "^5.9.0",

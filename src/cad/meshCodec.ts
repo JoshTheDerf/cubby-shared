@@ -111,6 +111,59 @@ export function decodeMeshBuffers(geom: MeshGeometry): MeshBuffers {
   return out;
 }
 
+/** Area-weighted vertex normals — a port of three's
+ *  `BufferGeometry.computeVertexNormals` (what CubbyCAD runs when a baked mesh
+ *  arrives without normals): each face's un-normalised normal is added to its
+ *  corners, then normalised. Non-indexed input yields flat normals. */
+export function computeVertexNormals(positions: Float32Array, indices?: Uint32Array): Float32Array {
+  const out = new Float32Array(positions.length);
+  const triCount = indices ? indices.length / 3 : positions.length / 9;
+  for (let t = 0; t < triCount; t++) {
+    const a = indices ? indices[t * 3] : t * 3;
+    const b = indices ? indices[t * 3 + 1] : t * 3 + 1;
+    const c = indices ? indices[t * 3 + 2] : t * 3 + 2;
+    // three: cb = C − B, ab = A − B, n = cb × ab.
+    const bx = positions[b * 3], by = positions[b * 3 + 1], bz = positions[b * 3 + 2];
+    const cbx = positions[c * 3] - bx, cby = positions[c * 3 + 1] - by, cbz = positions[c * 3 + 2] - bz;
+    const abx = positions[a * 3] - bx, aby = positions[a * 3 + 1] - by, abz = positions[a * 3 + 2] - bz;
+    const nx = cby * abz - cbz * aby, ny = cbz * abx - cbx * abz, nz = cbx * aby - cby * abx;
+    for (const v of [a, b, c]) { out[v * 3] += nx; out[v * 3 + 1] += ny; out[v * 3 + 2] += nz; }
+  }
+  for (let i = 0; i < out.length; i += 3) {
+    const len = Math.hypot(out[i], out[i + 1], out[i + 2]);
+    if (len > 0) { out[i] /= len; out[i + 1] /= len; out[i + 2] /= len; }
+  }
+  return out;
+}
+
+/** Plain triangles (render frame) as an inline `mesh` geometry; normals are
+ *  computed the way CubbyCAD would (area-weighted) when absent. */
+export function encodeMeshGeometry(m: {
+  positions: Float32Array; indices?: Uint32Array; normals?: Float32Array; colors?: Float32Array; name?: string;
+}): MeshGeometry {
+  return encodeMeshBuffers({
+    positions: m.positions,
+    normals: m.normals ?? computeVertexNormals(m.positions, m.indices),
+    ...(m.colors ? { colors: m.colors } : {}),
+    ...(m.indices ? { indices: m.indices } : {}),
+  }, m.name);
+}
+
+/** An inline `mesh` geometry's triangles, or null for any other geometry. */
+export function decodeMeshGeometry(g: { type: string }): {
+  positions: Float32Array; indices: Uint32Array | null; normals?: Float32Array; colors?: Float32Array;
+} | null {
+  const mg = g as MeshGeometry;
+  if (mg.type !== 'mesh' || !mg.data || typeof mg.data.position !== 'string') return null;
+  const b = decodeMeshBuffers(mg);
+  return {
+    positions: b.positions,
+    indices: b.indices ?? null,
+    ...(b.normals ? { normals: b.normals } : {}),
+    ...(b.colors ? { colors: b.colors } : {}),
+  };
+}
+
 /** Per-vertex flat normals for a triangle soup (each corner gets its face's
  *  normal; indexed vertices take the last face that touches them — use a
  *  non-indexed mesh for exact faceting). */

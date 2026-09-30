@@ -86,3 +86,8 @@ export function isCadGroup(n: CadNode): n is CadGroupNode {
 export function isCadPrimitive(n: CadNode): n is CadPrimitiveNode {
   return n.type === 'primitive' && !!(n as CadPrimitiveNode).geometry;
 }
+
+/** Millimetres per `CadScene.unit`. CubbyCAD stores every transform and shape
+ *  param in millimetres whatever `unit` says (it is display/export metadata,
+ *  and CubbyCAD writes 'mm'), so a reader should NOT rescale on import. */
+export const CAD_UNIT_TO_MM: Record<CadScene['unit'], number> = { mm: 1, cm: 10, m: 1000, in: 25.4 };

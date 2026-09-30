@@ -6,7 +6,7 @@ import { sdHalfCylinderEll } from '../sdf/primitives';
 export const halfCylinderShape = defineShape<HalfCylinderGeometry>({
   id: 'halfCylinder',
   label: 'Half cylinder', labelKey: 'primitives.halfCylinder',
-  icon: 'i-lucide-disc-half',
+  icon: 'i-lucide-rainbow',
   palette: true,
   defaults: { radius: 10, height: 10, depth: 20, radialSegments: 32 },
   schema: {

@@ -21,10 +21,10 @@
 /**
  * A grid of the shared built-in shapes (icon + label) in CubbyCAD's palette
  * order. Click emits `add(shapeId)`; dragging carries the id as
- * `application/x-cubby-shape` (and text/plain) for a drop target.
+ * `application/x-cubby-shape` (and text/plain) for a drop target. UIcon comes
+ * from the host app's Nuxt UI auto-import.
  */
 import { computed } from 'vue';
-import UIcon from '@nuxt/ui/components/Icon.vue';
 import { paletteSharedShapes } from '../shapes';
 import type { Translate } from '../schema';
 import { useCadTranslate } from './translate';

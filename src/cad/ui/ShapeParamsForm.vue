@@ -64,12 +64,12 @@
  * input, boolean → switch, enum → select) in `schema.order`, and emits every
  * edit as `{ params: { [key]: value } }` (the shape CubbyCAD's scene store
  * deep-merges into `geometry.params`).
+ *
+ * UFormField / UInput / USwitch / USelect come from the host app's Nuxt UI
+ * component auto-import (see the package README), which also picks the
+ * Vue-mode variants Nuxt UI needs outside Nuxt.
  */
 import { computed } from 'vue';
-import UFormField from '@nuxt/ui/components/FormField.vue';
-import UInput from '@nuxt/ui/components/Input.vue';
-import USwitch from '@nuxt/ui/components/Switch.vue';
-import USelect from '@nuxt/ui/components/Select.vue';
 import NumberSlider from './NumberSlider.vue';
 import type {
   PropertyPanelSchema, PropertySchema, NumberPropertySchema, IntegerPropertySchema,

@@ -21,7 +21,7 @@ Code shared by the [CubbyCAD editor](https://cubbycad.com/editor) and [Cubby Sli
 npm install github:JoshTheDerf/cubby-shared
 ```
 
-`three`, `vue`, `three-viewport-gizmo` (for the view cube), `manifold-3d` (for `cad`, which takes the initialised module as an argument) and `@nuxt/ui` (for `cad/ui`) are optional peer dependencies. If you link this package from a sibling checkout, add `resolve: { dedupe: ['three', 'vue', 'three-viewport-gizmo', '@nuxt/ui'] }` to the app's Vite config so there's one copy of each. The `cad/ui` components use Tailwind classes: add `@source "../node_modules/@cubby/shared/src/cad/ui";` (relative to your CSS entry) so Tailwind generates them.
+`three`, `vue`, `three-viewport-gizmo` (for the view cube), `manifold-3d` (for `cad`, which takes the initialised module as an argument) and `@nuxt/ui` (for `cad/ui`) are optional peer dependencies. If you link this package from a sibling checkout, add `resolve: { dedupe: ['three', 'vue', 'three-viewport-gizmo'] }` to the app's Vite config so there's one copy of each. The `cad/ui` components use Nuxt UI components by name and Tailwind classes: pass `scanPackages: ['@cubby/shared']` to Nuxt UI's Vite plugin (its component auto-import skips `node_modules` otherwise) and add `@source "../node_modules/@cubby/shared/src/cad/ui";` (relative to your CSS entry) so Tailwind generates their classes.
 
 To work on it next to an app:
 

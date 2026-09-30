@@ -20,6 +20,8 @@ export * from './nodes';
 export * from './matrix';
 export * from './evaluate';
 export * from './tree';
+export * from './nodeSettings';
+export * from './transfer';
 export * from './i18n';
 export * from './sdf/primitives';
 export type { Vec3, SdfSample, ColorSample, SampleBounds, BoolMode } from './sdf/types';

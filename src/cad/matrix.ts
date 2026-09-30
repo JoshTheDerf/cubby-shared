@@ -197,3 +197,68 @@ export function transformPositions(positions: Float32Array, m: Mat4): Float32Arr
   }
   return positions;
 }
+
+// ── quaternions & transform edits ────────────────────────────────────────────
+
+/** Quaternion [x, y, z, w] of an XYZ-order Euler rotation in radians (three's
+ *  `Quaternion.setFromEuler` for order 'XYZ'). */
+export function quatFromEulerXYZ(x: number, y: number, z: number): QuatTuple {
+  const c1 = Math.cos(x / 2), c2 = Math.cos(y / 2), c3 = Math.cos(z / 2);
+  const s1 = Math.sin(x / 2), s2 = Math.sin(y / 2), s3 = Math.sin(z / 2);
+  return [
+    s1 * c2 * c3 + c1 * s2 * s3,
+    c1 * s2 * c3 - s1 * c2 * s3,
+    c1 * c2 * s3 + s1 * s2 * c3,
+    c1 * c2 * c3 - s1 * s2 * s3,
+  ];
+}
+
+/** a · b (three's `multiplyQuaternions`). */
+export function multiplyQuaternions(a: QuatTuple, b: QuatTuple): QuatTuple {
+  const [qax, qay, qaz, qaw] = a;
+  const [qbx, qby, qbz, qbw] = b;
+  return [
+    qax * qbw + qaw * qbx + qay * qbz - qaz * qby,
+    qay * qbw + qaw * qby + qaz * qbx - qax * qbz,
+    qaz * qbw + qaw * qbz + qax * qby - qay * qbx,
+    qaw * qbw - qax * qbx - qay * qby - qaz * qbz,
+  ];
+}
+
+export interface TransformArgs {
+  /** 'set' (default) replaces each given field; 'offset' moves by `position`,
+   *  multiplies by `scale` and rotates by `rotationDeg` on top. */
+  mode?: 'set' | 'offset';
+  position?: number[];
+  /** XYZ Euler rotation in degrees. */
+  rotationDeg?: number[];
+  scale?: number[];
+}
+
+/**
+ * The transform CubbyCAD's `transform_node` produces (ai/host `transformNode`):
+ * missing fields keep their current value; length-3 arrays apply. Always
+ * returns all three fields.
+ */
+export function applyTransformArgs(t: CadTransform | undefined, a: TransformArgs): Required<CadTransform> {
+  const mode = a.mode ?? 'set';
+  const oldPos = [...(t?.position ?? [0, 0, 0])] as Vec3Tuple;
+  const oldRot = [...(t?.rotation ?? [0, 0, 0, 1])] as QuatTuple;
+  const oldScale = [...(t?.scale ?? [1, 1, 1])] as Vec3Tuple;
+  const position: Vec3Tuple = [...oldPos];
+  let rotation: QuatTuple = [...oldRot];
+  const scale: Vec3Tuple = [...oldScale];
+  if (a.position && a.position.length === 3) {
+    for (let i = 0; i < 3; i++) position[i] = mode === 'offset' ? oldPos[i] + a.position[i] : a.position[i];
+  }
+  if (a.scale && a.scale.length === 3) {
+    for (let i = 0; i < 3; i++) scale[i] = mode === 'offset' ? oldScale[i] * a.scale[i] : a.scale[i];
+  }
+  if (a.rotationDeg && a.rotationDeg.length === 3) {
+    const d2r = Math.PI / 180;
+    const q = quatFromEulerXYZ(a.rotationDeg[0] * d2r, a.rotationDeg[1] * d2r, a.rotationDeg[2] * d2r);
+    // Offset composes the delta rotation onto the current orientation.
+    rotation = mode === 'offset' ? multiplyQuaternions(q, oldRot) : q;
+  }
+  return { position, rotation, scale };
+}

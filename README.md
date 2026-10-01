@@ -1,6 +1,6 @@
 # @cubby/shared
 
-Code shared by the [CubbyCAD editor](https://cubbycad.com/editor) and [Cubby Slicer](https://github.com/JoshTheDerf/cubbyslicer). It's TypeScript source with no build step, so the apps' Vite and vue-tsc compile it directly.
+Code shared by the [CubbyCAD editor](https://cubbycad.com/editor) and [CubbySlicer](https://github.com/JoshTheDerf/cubbyslicer). It's TypeScript source with no build step, so the apps' Vite and vue-tsc compile it directly.
 
 | Import | What it is |
 | --- | --- |

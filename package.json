@@ -1,7 +1,7 @@
 {
   "name": "@cubby/shared",
   "version": "0.1.0",
-  "description": "Code shared by CubbyCAD and Cubby Slicer.",
+  "description": "Code shared by CubbyCAD and CubbySlicer.",
   "type": "module",
   "private": false,
   "license": "MIT",

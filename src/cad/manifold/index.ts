@@ -1,6 +1,6 @@
 /**
  * `@cubby/shared/cad/manifold` — CubbyCAD's Manifold-3d helpers, shared with
- * Cubby Slicer. THREE-free and WASM-free: every function takes the Manifold
+ * CubbySlicer. THREE-free and WASM-free: every function takes the Manifold
  * module (or its `Mesh`/`Manifold` classes) as an argument, so it runs on the
  * main thread, in a worker, or under Node.
  *

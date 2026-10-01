@@ -1,6 +1,6 @@
 /**
  * `@cubby/shared/cad/ui` — CubbyCAD's shape-editing Vue components, shared
- * with Cubby Slicer. Their templates use Nuxt UI (4) components by name
+ * with CubbySlicer. Their templates use Nuxt UI (4) components by name
  * (UFormField, UInput, USwitch, USelect, UIcon) and Tailwind classes, so the
  * host app must:
  *  - run Nuxt UI's Vite plugin with `scanPackages: ['@cubby/shared']` (its

@@ -1,5 +1,5 @@
 /**
- * Action registry records shared by CubbyCAD and Cubby Slicer. An Action is
+ * Action registry records shared by CubbyCAD and CubbySlicer. An Action is
  * declared once and projected onto every surface (menus, command palette,
  * toolbars, keyboard, shortcuts help). `when` / `state` / `run` read the app's
  * single reactive context, so action tables stay pure data modules.

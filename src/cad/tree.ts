@@ -1,5 +1,5 @@
 /**
- * Pure node-tree operations shared by CubbyCAD and Cubby Slicer — moved from
+ * Pure node-tree operations shared by CubbyCAD and CubbySlicer — moved from
  * CubbyCAD `scene/NodeTreeUtils.ts`, `core/history/operations/GroupNodesOperation.ts`
  * / `UngroupNodeOperation.ts` and the node-creation paths, which now call these.
  *

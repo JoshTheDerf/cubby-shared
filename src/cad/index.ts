@@ -1,5 +1,5 @@
 /**
- * `@cubby/shared/cad` — CubbyCAD's modelling core, shared with Cubby Slicer:
+ * `@cubby/shared/cad` — CubbyCAD's modelling core, shared with CubbySlicer:
  * the `.cubby` node types, the built-in shape registry (every Manifold-built
  * primitive), an evaluator with CubbyCAD's manifold-group semantics, pure
  * tree operations (create / group / ungroup / holes) and transform math.

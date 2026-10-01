@@ -1,7 +1,7 @@
 /**
  * @cubby/shared/gizmo — CubbyCAD's TinkerCad-style edit gizmo (scale handles,
  * floor-translate, lift cone, rotation arcs + dial, editable dimension labels),
- * shared by the editor and Cubby Slicer.
+ * shared by the editor and CubbySlicer.
  *
  * - `EditGizmo`: the gizmo itself (Y-up, one target Object3D, the editor's
  *   callback API). CubbyCAD uses it directly.

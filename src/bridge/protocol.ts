@@ -1,5 +1,5 @@
 /**
- * Wire protocol between a browser tab (CubbyCAD, Cubby Slicer) and the local
+ * Wire protocol between a browser tab (CubbyCAD, CubbySlicer) and the local
  * `cubby-mcp` process. JSON text frames over one WebSocket to 127.0.0.1.
  *
  *   tab    → server  hello   (app, instance id, token or one-time pairing code)

@@ -59,7 +59,7 @@
 <script setup lang="ts">
 /**
  * The property form for a shape's params — CubbyCAD's built-in-schema panel
- * (moved from its GeometryProperties.vue), shared with Cubby Slicer. Renders
+ * (moved from its GeometryProperties.vue), shared with CubbySlicer. Renders
  * one control per schema property (number/integer → NumberSlider, string →
  * input, boolean → switch, enum → select) in `schema.order`, and emits every
  * edit as `{ params: { [key]: value } }` (the shape CubbyCAD's scene store

@@ -4,7 +4,7 @@ import type { CameraSnapshot } from './cameraSnapshot';
 export type HistoryChangeCallback = (canUndo: boolean, canRedo: boolean) => void;
 
 /**
- * Undo/redo stack shared by CubbyCAD and Cubby Slicer. Parameterized on the
+ * Undo/redo stack shared by CubbyCAD and CubbySlicer. Parameterized on the
  * state the operations work against (CubbyCAD's `Scene`, its voxel session,
  * the slicer's project); each editor instantiates its own manager.
  */

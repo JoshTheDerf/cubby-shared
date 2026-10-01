@@ -31,7 +31,7 @@ function make(over: Partial<BridgeClientOptions> = {}) {
   const session = new MemStorage();
   const confirm = vi.fn(async () => ({ ok: true, always: false }));
   const client = new BridgeClient({
-    app: 'slicer', appName: 'Cubby Slicer', storage, session, confirm,
+    app: 'slicer', appName: 'CubbySlicer', storage, session, confirm,
     WebSocketImpl: FakeWs, fetchImpl: okFetch, title: () => 'Slicer', url: () => 'http://localhost:5393/slicer/',
     tools: [
       { name: 'echo', description: 'Echo', inputSchema: { type: 'object' }, run: (a) => ({ data: { echo: a.x } }) },
